@@ -23,37 +23,25 @@
 
 \paragraph{Introduction}
 
-Why is the topic interesting?
 Every year, Division One college basketball programs from across the country participate in a national tournament to determine the best program.  This tournament, which is immensely popular and takes place during March, has come to be known as "March Madness".  March Madness gets its name from various sources.  On the one hand, it is widely known for its upsets.  Teams heavily favored in match-ups lose with heightened regularity, and there are often "Cinderella" teams who advance further than anyone was expecting.  Additionally, millions of Americans fill out brackets each year to predict the winner, and there is a tremendous amount of betting associated with these brackets.  All of this means that there is a pronounced interest in being able to predict outcomes as accurately as possible, making March Madness a fascinating topic for statistical modeling.  
 
-What has been done?
-Many statistical models of varying degrees of complexity have been developed to aid in tournament outcome prediction.  Models typically draw upon a variety of different factors to predict success.  Historical performance data, current season performance, rankings, and team composition metrics are some of the most commonly used.~\citep{toutkoushian2011predicting}.  Ranking systems themselves are often immensely statistically rigorous, and there are plenty of different systems in popular use today ~\citep{steinberg2018march}.  Moreover, models themselves have been constructed via various difference machine learning methods, such as linear regression, logistic regression, decision trees, nearest neighbors, random forest, and many others ~\citep{}
+Many statistical models of varying degrees of complexity have been developed to aid in tournament outcome prediction.  Models typically draw upon a variety of different factors to predict success.  Historical performance data, current season performance, rankings, and team composition metrics are some of the most commonly used.~\citep{toutkoushian2011predicting}.  Ranking systems themselves are often immensely statistically rigorous, and there are plenty of different systems in popular use today ~\citep{steinberg2018march}.  Moreover, models themselves have been constructed via various difference machine learning methods, such as linear regression, logistic regression, decision trees, nearest neighbors, random forest, and many others ~\citep{fonseca2018march}.
 
-What is new?
-
-Background about your research; touch the three questions to be addressed in an
-introduction; cite relevant references~\citep[e.g.,][]{dwivedi2017analysis}.
-
+In this paper, I will build my own small-scale model to predict tournament game outcomes.  I will seek to identify, using updated data (2008-2022), which factors are the most important in predicting a team's success in tournament games.
 
 \paragraph{Specific Aims}
 
-Overall Research Question:
+The specific aim of this analysis is to determine which factors are the most significant in predicting March Madness tournament success.  This question can be broken down along a few dimensions.  First, it is useful to know which (if any) team statistics play a major role in predicting wins.  These team statistics can be defensive statistics such as points allowed, opponent's shooting percentages, turnovers caused, and defensive ratings.  They can also be offensive statistics such as shooting percentage, points scored, assists, offensive efficiency, etc.  
 
-Specific Statistical Questions that can be investigated
-
-Formulate your research question;
-translate your research question into statistical/data science questions
+Additionally, I would like to investigate the ratings metrics developed by Ken Pomeroy and Bart Torvik to see how well they predict tournament success.  Since both have metrics covering adjusted offensive/defensive ratings, efficiency, and tempo, it would be useful to do a comparative analysis between these two popular metrics systems.  
 
 \paragraph{Data}
 
-Introduce the data:
-Source
-Summary
-
-Hopefully, you have identified the data needed for your project. Give a
-description about it.
+The data that I will use for this analysis has been pulled from https://kenpom.com/ and https://www.barttorvik.com/ via Kaggle.  It includes updated data from 2008-2022 on various facets of the NCAA tournament, including team data, trend data, game data, upset data, conference data, and more.  Additionally, it includes designed metrics from both Ken Pomeroy and Bart Torvik on adjusted efficiency, offense, defense, and tempo, as specified above.  I will use the fields from these data sets to build the model.  
 
 \paragraph{Research Design and Methods}
+
+There are numerous ways to measure the success of a team in the NCAA tournament, but for this paper we shall simply treat the dependent variable as a two-level categorical variable (wins vs. losses).  Thus, since the predicted variable is categorical, this can be treated as a classification problem, which lends itself well to a logistic regression approach.  
 
 Discuss Methodology for how you will answer the question
 
