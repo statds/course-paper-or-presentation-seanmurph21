@@ -37,24 +37,21 @@ Additionally, I would like to investigate the ratings metrics developed by Ken P
 
 \paragraph{Data}
 
-The data that I will use for this analysis has been pulled from https://kenpom.com/ and https://www.barttorvik.com/ via Kaggle.  It includes updated data from 2008-2022 on various facets of the NCAA tournament, including team data, trend data, game data, upset data, conference data, and more.  Additionally, it includes designed metrics from both Ken Pomeroy and Bart Torvik on adjusted efficiency, offense, defense, and tempo, as specified above.  I will use the fields from these data sets to build the model.  
+The data that I will use for this analysis has been pulled from https://kenpom.com/ and https://www.barttorvik.com/ via Kaggle.  It includes updated data from 2008-2022 on various facets of the NCAA tournament, including team data, trend data, game data, upset data, conference data, and more.  The data from the year 2020 are missing due to the tournament being cancelled during the COVID-19 pandemic.  Additionally, it includes designed metrics from both Ken Pomeroy and Bart Torvik on adjusted efficiency, offense, defense, and tempo, as specified above.  I will use the fields from these data sets to build the model.  
 
 \paragraph{Research Design and Methods}
 
-There are numerous ways to measure the success of a team in the NCAA tournament, but for this paper we shall simply treat the dependent variable as a two-level categorical variable (wins vs. losses).  Thus, since the predicted variable is categorical, this can be treated as a classification problem, which lends itself well to a logistic regression approach.  
+There are numerous ways to measure the success of a team in the NCAA tournament, but for this paper we shall simply treat the dependent variable as a two-level categorical variable (wins vs. losses).  Thus, since the predicted variable is categorical, this can be treated as a classification problem, which lends itself well to a logistic regression approach.  With a logistic regression model fitted, we will be able to see the probability associated with winning or losing for each team in a given tournament year ~\citep{fonseca2018march}. 
 
-Discuss Methodology for how you will answer the question
+I will begin by examining the data, and selecting the factors that are often cited as most influential on game outcomes.  Then, I will fit a model including all these factors, aiming to identify those with significant influence on game outcomes.  I will eliminate predictors that are not identified as significant by the initial fit, and will create a new model with fewer predictors.  By this backward selection process I will seek to identify an optimal model for prediction, which can be evaluated by applying it to tournaments from previous years.  
 
-What design or methods will you use?
-Cite relevant references~\citep[e.g.,][]{wild2004global}.
 
 \paragraph{Discussion}
-What are the most challenge parts of the task?
+Perhaps the most challenging aspect of this analysis lies in the potential for collinearity among the predictors.  For instance, it is likely that there may be strong collinearity present among offensive or defensive statistical predictors, which will have to be sorted out in the model construction process.  Teams that perform quite well in one of these areas often tend to do well in their respective subcategories.
 
-What are the limitations of your work?
+One limitation of this analysis is that I will not be addressing a pressing question that often arises with respect to the NCAA tournament.  Namely, I will not attempt to identify the factors that most accurately predict upsets in the course of the tournament.  Given the time and scope of this project, this simply does not seem feasible in addition to the intended analysis described above.  
 
-What is your fall-back plan if
-something unexpected happens?
+As a fall back plan, I can always identify different data sources that contain more information related to the model I am building.  Additionally, I can implement various different types of models and compare their effectiveness. 
 
 \bibliography{proposalreferences}
 \bibliographystyle{chicago}
