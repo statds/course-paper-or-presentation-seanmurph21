@@ -23,35 +23,96 @@
 
 \paragraph{Introduction}
 
-Every year, Division One college basketball programs from across the country participate in a national tournament to determine the best program.  This tournament, which is immensely popular and takes place during March, has come to be known as "March Madness".  March Madness gets its name from various sources.  On the one hand, it is widely known for its upsets.  Teams heavily favored in match-ups lose with heightened regularity, and there are often "Cinderella" teams who advance further than anyone was expecting.  Additionally, millions of Americans fill out brackets each year to predict the winner, and there is a tremendous amount of betting associated with these brackets.  All of this means that there is a pronounced interest in being able to predict outcomes as accurately as possible, making March Madness a fascinating topic for statistical modeling.  
+Every year, Division One college basketball programs from across the country 
+participate in a national tournament to determine the best program.  This  
+tournament, which is immensely popular and takes place during March, has 
+come to be known as "March Madness".  March Madness gets its name from various 
+sources.  On the one hand, it is widely known for its upsets.  Teams heavily 
+favored in match-ups lose with heightened regularity, and there are often 
+"Cinderella" teams who advance further than anyone was expecting.  
+Additionally, millions of Americans fill out brackets each year to predict 
+the winner, and there is a tremendous amount of betting associated with 
+these brackets.  All of this means that there is a pronounced interest in 
+being able to predict outcomes as accurately as possible, making March 
+Madness a fascinating topic for statistical modeling.  
 
-Many statistical models of varying degrees of complexity have been developed to aid in tournament outcome prediction.  Models typically draw upon a variety of different factors to predict success.  Historical performance data, current season performance, rankings, and team composition metrics are some of the most commonly used.~\citep{toutkoushian2011predicting}.  Ranking systems themselves are often immensely statistically rigorous, and there are plenty of different systems in popular use today ~\citep{steinberg2018march}.  Moreover, models themselves have been constructed via various difference machine learning methods, such as linear regression, logistic regression, decision trees, nearest neighbors, random forest, and many others ~\citep{fonseca2018march}.
+Many statistical models of varying degrees of complexity have been developed 
+to aid in tournament outcome prediction.  Models typically draw upon a variety 
+of different factors to predict success.  Historical performance data, current 
+season performance, rankings, and team composition metrics are some of the 
+most commonly used.~\citep{toutkoushian2011predicting}.  Ranking systems 
+themselves are often immensely statistically rigorous, and there are plenty of 
+different systems in popular use today ~\citep{steinberg2018march}.  Moreover, 
+models themselves have been constructed via various difference machine learning 
+methods, such as linear regression, logistic regression, decision trees, 
+nearest neighbors, random forest, and many others ~\citep{fonseca2018march}.
 
-In this paper, I will build my own small-scale model to predict tournament game outcomes.  I will seek to identify, using updated data (2008-2022), which factors are the most important in predicting a team's success in tournament games.
+In this paper, I will build my own small-scale model to predict tournament game 
+outcomes.  I will seek to identify, using updated data (2008-2022), which 
+factors are the most important in predicting a team's success in tournament games.
 
 \paragraph{Specific Aims}
 
-The specific aim of this analysis is to determine which factors are the most significant in predicting March Madness tournament success.  This question can be broken down along a few dimensions.  First, it is useful to know which (if any) team statistics play a major role in predicting wins.  These team statistics can be defensive statistics such as points allowed, opponent's shooting percentages, turnovers caused, and defensive ratings.  They can also be offensive statistics such as shooting percentage, points scored, assists, offensive efficiency, etc.  
+The specific aim of this analysis is to determine which factors are the most 
+significant in predicting March Madness tournament success.  This question can 
+be broken down along a few dimensions.  First, it is useful to know which (if any) 
+team statistics play a major role in predicting wins.  These team statistics can 
+be defensive statistics such as points allowed, opponent's shooting percentages, 
+turnovers caused, and defensive ratings.  They can also be offensive statistics 
+such as shooting percentage, points scored, assists, offensive efficiency, etc.  
 
-Additionally, I would like to investigate the ratings metrics developed by Ken Pomeroy and Bart Torvik to see how well they predict tournament success.  Since both have metrics covering adjusted offensive/defensive ratings, efficiency, and tempo, it would be useful to do a comparative analysis between these two popular metrics systems.  
+Additionally, I would like to investigate the ratings metrics developed by Ken 
+Pomeroy and Bart Torvik to see how well they predict tournament success.  Since 
+both have metrics covering adjusted offensive/defensive ratings, efficiency, and 
+tempo, it would be useful to do a comparative analysis between these two popular 
+metrics systems.  
 
 \paragraph{Data}
 
-The data that I will use for this analysis has been pulled from https://kenpom.com/ and https://www.barttorvik.com/ via Kaggle.  It includes updated data from 2008-2022 on various facets of the NCAA tournament, including team data, trend data, game data, upset data, conference data, and more.  The data from the year 2020 are missing due to the tournament being cancelled during the COVID-19 pandemic.  Additionally, it includes designed metrics from both Ken Pomeroy and Bart Torvik on adjusted efficiency, offense, defense, and tempo, as specified above.  I will use the fields from these data sets to build the model.  
+The data that I will use for this analysis has been pulled from https://kenpom.com/ 
+and https://www.barttorvik.com/ via Kaggle.  It includes updated data from 2008-2022 
+on various facets of the NCAA tournament, including team data, trend data, game data, 
+upset data, conference data, and more.  The data from the year 2020 are missing due 
+to the tournament being cancelled during the COVID-19 pandemic.  Additionally, it 
+includes designed metrics from both Ken Pomeroy and Bart Torvik on adjusted efficiency, 
+offense, defense, and tempo, as specified above.  I will use the fields from these 
+data sets to build the model.  
 
 \paragraph{Research Design and Methods}
 
-There are numerous ways to measure the success of a team in the NCAA tournament, but for this paper we shall simply treat the dependent variable as a two-level categorical variable (wins vs. losses).  Thus, since the predicted variable is categorical, this can be treated as a classification problem, which lends itself well to a logistic regression approach.  With a logistic regression model fitted, we will be able to see the probability associated with winning or losing for each team in a given tournament year ~\citep{fonseca2018march}. 
+There are numerous ways to measure the success of a team in the NCAA tournament, but 
+for this paper we shall simply treat the dependent variable as a two-level categorical 
+variable (wins vs. losses).  Thus, since the predicted variable is categorical, this 
+can be treated as a classification problem, which lends itself well to a logistic 
+regression approach.  With a logistic regression model fitted, we will be able to see 
+the probability associated with winning or losing for each team in a given tournament 
+year ~\citep{fonseca2018march}. 
 
-I will begin by examining the data, and selecting the factors that are often cited as most influential on game outcomes.  Then, I will fit a model including all these factors, aiming to identify those with significant influence on game outcomes.  I will eliminate predictors that are not identified as significant by the initial fit, and will create a new model with fewer predictors.  By this backward selection process I will seek to identify an optimal model for prediction, which can be evaluated by applying it to tournaments from previous years.  
+I will begin by examining the data, and selecting the factors that are often cited as 
+most influential on game outcomes.  Then, I will fit a model including all these 
+factors, aiming to identify those with significant influence on game outcomes.  I 
+will eliminate predictors that are not identified as significant by the initial fit, 
+and will create a new model with fewer predictors.  By this backward selection process 
+I will seek to identify an optimal model for prediction, which can be evaluated by 
+applying it to tournaments from previous years.  
 
 
 \paragraph{Discussion}
-Perhaps the most challenging aspect of this analysis lies in the potential for collinearity among the predictors.  For instance, it is likely that there may be strong collinearity present among offensive or defensive statistical predictors, which will have to be sorted out in the model construction process.  Teams that perform quite well in one of these areas often tend to do well in their respective subcategories.
+Perhaps the most challenging aspect of this analysis lies in the potential for 
+collinearity among the predictors.  For instance, it is likely that there may be strong 
+collinearity present among offensive or defensive statistical predictors, which will 
+have to be sorted out in the model construction process.  Teams that perform quite well 
+in one of these areas often tend to do well in their respective subcategories.
 
-One limitation of this analysis is that I will not be addressing a pressing question that often arises with respect to the NCAA tournament.  Namely, I will not attempt to identify the factors that most accurately predict upsets in the course of the tournament.  Given the time and scope of this project, this simply does not seem feasible in addition to the intended analysis described above.  
+One limitation of this analysis is that I will not be addressing a pressing question 
+that often arises with respect to the NCAA tournament.  Namely, I will not attempt to 
+identify the factors that most accurately predict upsets in the course of the tournament.  
+Given the time and scope of this project, this simply does not seem feasible in addition 
+to the intended analysis described above.  
 
-As a fall back plan, I can always identify different data sources that contain more information related to the model I am building.  Additionally, I can implement various different types of models and compare their effectiveness. 
+As a fall back plan, I can always identify different data sources that contain more 
+information related to the model I am building.  Additionally, I can implement various 
+different types of models and compare their effectiveness. 
 
 \bibliography{proposalreferences}
 \bibliographystyle{chicago}
