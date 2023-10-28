@@ -1,0 +1,143 @@
+\documentclass[12pt]{article}
+
+%% preamble: Keep it clean; only include those you need
+\usepackage{amsmath}
+\usepackage[margin = 1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{natbib}
+
+% highlighting hyper links
+\usepackage[colorlinks=true, citecolor=blue]{hyperref}
+
+\title{Comparison of Multi-Class Classification Methods}
+\author{Sean Murphy\\
+  Statistics Major\\
+  University of Connecticut
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+THE ABSTRACT WILL BE WRITTEN AFTER THE REST OF THE PAPER HAS BEEN WRITTEN. 
+\end{abstract}
+
+
+\section{Introduction}
+\label{sec:intro}
+
+Use this section to answer three questions:
+Why is the topic important/interesting?
+What has been done on this topic in the literature?
+What is your contribution?
+
+To cite a reference, here are examples.
+\citet{xie2015dynamic} did something ... 
+
+A lot of work has been done \citep[e.g.,][]{xie2015dynamic}.
+Some parametric bootstrap sample size approach was proposed by
+\citet{dwivedi2017analysis}. 
+
+
+% roadmap
+The rest of the paper is organized as follows.
+The data will be presented in Section~\ref{sec:data}.
+The methods are described in Section~\ref{sec:meth}.
+The results are reported in Section~\ref{sec:resu}.
+A discussion concludes in Section~\ref{sec:disc}.
+
+
+\section{Data}
+\label{sec:data}
+
+The data that will be analyzed in this study comes from the UC Irvine Machine Learning Repository.  It is a dataset from 2009 containing information about a sample of red "Vinho Verde" wine from north Portugal.  The dataset contains $n=1,599$ observations (different wine samples) of twelve variables, eleven of which are continuous numeric variables.  These continuous variables are different physiochemical measurements of the wine samples: fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulfates and alcohol.  The other variable contained in the dataset is wine quality, which takes integer values from 0-10 (0 being lowest quality, 10 being highest quality).  Though numeric, this variable will be treated as having 11 classes, and will be the response variable in the analysis.  The goal is to predict the class of wine quality for a given sample of red wine based on its physiochemical properties.  
+
+PROVIDE HERE SOME SUMMARY STATISTICS OF THE DATASET
+
+Use this section to describe the data that helps to answer your research
+questions. Recall Einstein's equation
+\begin{equation}
+  \label{eq:mc2}
+  E = m c^2,
+\end{equation}
+which states that the energy $E$ of a particle in its rest frame as the product
+of mass ($m$) with the speed of light squared ($c^2$).
+
+\section{Background}
+\label{sec:back}
+
+
+
+\section{Methods}
+\label{sec:meth}
+
+Use this section to present the methodologies that will generate results by
+analyzing the data. Suppose that the radius of a circle is $r$. Then its area is
+\begin{equation}
+  \label{eq:area}
+  \pi r^2.
+\end{equation}
+
+Equation~\eqref{eq:area} is interesting.
+
+Sometimes I don't want an equation to be numbered such as this one:
+\[
+  f(x) = \frac{1}{\sqrt{2\pi}} \exp\left( - \frac{x^2}{2} \right),
+\]
+which is the density of a standard normal variable.
+
+
+
+\section{Results}
+\label{sec:resu}
+
+Table~\ref{tab:rv} summarizes some example draws from some distributions.
+
+\begin{table}[tbp]
+  \caption{This is my first table.}
+  \label{tab:rv}
+\centering
+\begin{tabular}{rrr}
+  \toprule
+normal & poisson & gamma \\ 
+  \midrule
+-0.110 & 4 & 2.401 \\ 
+  0.116 & 4 & 3.529 \\ 
+  -0.828 & 9 & 2.112 \\ 
+  -0.066 & 6 & 11.104 \\ 
+  0.219 & 3 & 4.815 \\ 
+  0.303 & 5 & 2.188 \\ 
+  0.544 & 0 & 8.050 \\ 
+  -2.617 & 8 & 3.646 \\ 
+  0.747 & 1 & 5.178 \\ 
+  -1.103 & 4 & 3.043 \\ 
+   \bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:cars} shows the distance against the speed from this dataset.
+
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=\textwidth]{cars.pdf}
+  \caption{This is my first figure.}
+  \label{fig:cars}
+\end{figure}
+
+\section{Discussion}
+\label{sec:disc}
+
+What are the main contributions again?
+
+What are the limitations of this study?
+
+What are worth pursuing further in the future?
+
+Watch for prevalence of diabetes \citep{wild2004global}.
+
+\bibliography{references}
+\bibliographystyle{chicago}
+
+\end{document}
