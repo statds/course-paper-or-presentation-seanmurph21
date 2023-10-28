@@ -40,7 +40,6 @@ THE ABSTRACT WILL BE WRITTEN AFTER THE REST OF THE PAPER HAS BEEN WRITTEN.
 % \citet{dwivedi2017analysis}. 
 
 
-ROADMAP PARAGRAPH
 The rest of the paper will be organized in the following way.  
 An introduction to the red wine data set will be presented in 
 Section~\ref{sec:data}.  This section will describe the variables 
@@ -94,7 +93,58 @@ OVERVIEW PARAGRAPH
 \subsection{Classification Methods}
 \label{sec:class}
 
-MULTINOMIAL LOGISTIC REGRESSION
+In classification, multinomial regression is the name given to the 
+logistic regression model that predicts response variable values 
+for $K > 2$ classes.  Since it is an extension of logistic regression 
+for binary classification, it shares many of the same characteristics.  
+Logistic regression models in general are modifications to linear 
+regression models that make them fit to return values between 0 and 1.  
+Recall that a multiple linear regression model takes the following form:
+\begin{equation}
+  \label{eq:linreg}
+  Y = \beta_0 + \beta_1X_1 + ... + \beta_pX_p + \epsilon.
+\end{equation}
+In Equation~\eqref{eq:linreg}, we see that there is nothing restricting 
+$Y$ from taking values $> 1$ or $< 0$.  This is problematic if we wish 
+for our model to predict the probability that the response variable 
+falls within a particular class, since probabilities can only take values 
+between 0 and 1.  In order to solve this problem, the binary classification 
+logistic regression model takes the following form:
+\begin{equation}
+  \label{eq:logreg}
+  p(X) = 
+  \frac{e ^ {\beta_0 + \beta_1X_1 + ... + \beta_pX_p}} 
+  {1 + e ^ {\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
+\end{equation}
+In Equation~\eqref{eq:logreg}, we see that this problem is essentially 
+solved by exponentiation.  The multiple linear regression model is placed 
+into the exponent of $e$ to ensure that the numerator and denominator will 
+always be positive.  This means that the overall model will not return values 
+$< 0$.  Additionally, because the numerator will never exceed the denominator, 
+the fraction will always be $\leq 1$.  Thus, the model outputs values in the 
+desired range for predicting probabilities.  Since in binary classification 
+there are only two classes, the output of this model represents the probability 
+that $Y$ will fall into one of the predetermined classes.  The probability that 
+$Y$ will fall into the other class is simply $1 - p(X)$.
+
+ In multinomial logistic regression, however, there are more than 2 classes 
+ into which the response variable could fall.  The binary model is generalized 
+ to $K > 2$ classes in the following manner:
+ \begin{equation}
+  \label{eq:multireg}
+  Pr( Y = k | X = x ) = 
+  \frac{e ^ {\beta_k0 + \beta_k1X_1 + ... + \beta_kpX_p}}
+  { \sum_{l = 1} ^ {K}  e ^ {\beta_l0 + \beta_l1X_1 + ... + \beta_lpX_p}},
+\end{equation}
+where $x$ is a vector of the $p$ predictor values.  In 
+Equation~\eqref{eq:multireg}, we see that the numerator is the exponentiated 
+linear model for class $k$, while the denominator is the sum of the exponentiated 
+linear models for all $K = k$ classes.  It should be noted that this is not the 
+only way of generalizing the binary logistic regression model to $K >2$ classes.  
+The model presented in Equation~\eqref{eq:multireg} is known as the \textit{softmax} 
+coding \citep{james2021introduction}.  There are other versions of multinomial 
+regression models, but we will not use them and thus not elaborate on them further 
+for this analysis.  
 
 LINEAR DISCRIMINANT ANALYSIS
 
