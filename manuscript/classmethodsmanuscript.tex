@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-%% preamble: Keep it clean; only include those you need
+% preamble
 \usepackage{amsmath}
 \usepackage[margin = 1in]{geometry}
 \usepackage{graphicx}
@@ -23,7 +23,6 @@
 THE ABSTRACT WILL BE WRITTEN AFTER THE REST OF THE PAPER HAS BEEN WRITTEN. 
 \end{abstract}
 
-
 \section{Introduction}
 \label{sec:intro}
 
@@ -39,7 +38,6 @@ THE ABSTRACT WILL BE WRITTEN AFTER THE REST OF THE PAPER HAS BEEN WRITTEN.
 % Some parametric bootstrap sample size approach was proposed by
 % \citet{dwivedi2017analysis}. 
 
-
 The rest of the paper will be organized in the following way.  
 An introduction to the red wine data set will be presented in 
 Section~\ref{sec:data}.  This section will describe the variables 
@@ -52,35 +50,44 @@ which will be used to compare the predictive effectiveness of each
 model will be introduced in Section~\ref{sec:metr}.  After this, 
 the results will be presented with tables and figures in 
 Section~\ref{sec:resu}.  Finally, once the results of the analysis 
-have been described, a discussion of their implications and suggestions 
-for further study will be covered in Section~\ref{sec:disc}.
+have been described, a discussion of their implications and 
+suggestions for further study will be covered in Section~\ref{sec:disc}.
 
 
 \section{Data}
 \label{sec:data}
 
-The data that will be analyzed in this study comes from the UC Irvine 
-Machine Learning Repository.  It is a dataset from 2009 containing 
-information about a sample of red "Vinho Verde" wine from north Portugal.  
-The dataset contains $n=1,599$ observations (different wine samples) of 
-twelve variables, eleven of which are continuous numeric variables.  
-These continuous variables are different physiochemical measurements of 
-the wine samples: fixed acidity, volatile acidity, citric acid, residual 
-sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, 
-pH, sulfates and alcohol.  The other variable contained in the dataset 
-is wine quality, which takes integer values from 0-10 (0 being lowest 
-quality, 10 being highest quality).  Though numeric, this variable will 
-be treated as having 11 classes, and will be the response variable in 
-the analysis.  The goal is to predict the class of wine quality for a 
-given sample of red wine based on its physiochemical properties.  
+The data that will be analyzed in this study comes from the UC Irvine Machine 
+Learning Repository.  It is a dataset from 2009 containing information about 
+a sample of red "Vinho Verde" wine from north Portugal.  The dataset contains 
+$n = 1,599$ observations (different wine samples) of twelve variables, eleven 
+of which are continuous numeric variables.  These continuous variables are 
+different physiochemical measurements of the wine samples: fixed acidity, 
+volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, 
+total sulfur dioxide, density, pH, sulfates and alcohol.  The other variable 
+contained in the dataset is wine quality, which takes integer values from 0-10 
+(0 being lowest quality, 10 being highest quality).  Though numeric, this 
+variable will be treated as having 11 classes, and will be the response variable 
+in the analysis.  The goal is to predict the class of wine quality for a given 
+sample of red wine based on its physiochemical properties.  
 
 PROVIDE HERE SOME SUMMARY STATISTICS OF THE DATASET
 
 See a summary of the counts of wine samples at each quality level in 
 Table~\ref{tab:qual}.
+
+We can see that there are no wine samples in our dataset that had quality 
+levels of 0, 1, 2, 9, or 10.  All of the quality levels fell within the 
+range from 3 to 8, and within this range, the vast majority were rated 
+either a 5 or a 6.  Indeed, these two levels alone account for over 82 
+percent of the data.  
+
+We can see in the histogram and boxplot in Figure~\ref{fig:wine} that 
+the distribution of wine quality levels is roughly symmetric, with 
+outliers depicted in the boxplot at quality levels of 3 and 8.  
+
 \begin{table}[tbp]
- \caption{This table provides the number of wine samples by each wine 
- quality level.}
+ \caption{This table provides the number of wine samples by each wine quality level.}
 \label{tab:qual}
 \centering
 \begin{tabular}{rrr}
@@ -102,14 +109,12 @@ Table~\ref{tab:qual}.
 \end{tabular}
 \end{table}
 
-% Use this section to describe the data that helps to answer your research
-% questions. Recall Einstein's equation
-% \begin{equation}
-  % \label{eq:mc2}
-  % E = m c^2,
-% \end{equation}
-% which states that the energy $E$ of a particle in its rest frame as the product
-% of mass ($m$) with the speed of light squared ($c^2$).
+\begin{figure}[tbp]
+ \centering
+ \includegraphics[width=\textwidth]{manuscriptfigure.pdf}
+ \caption{A boxplot and a histogram of the wine quality for the samples of Portuguese red wine.}
+ \label{fig:wine}
+\end{figure}
 
 \section{Methods}
 \label{sec:meth}
@@ -119,10 +124,12 @@ OVERVIEW PARAGRAPH
 \subsection{Classification Methods}
 \label{sec:class}
 
+MULTINOMIAL LOGISTIC REGRESSION
+
 In classification, multinomial regression is the name given to the 
-logistic regression model that predicts response variable values 
-for $K > 2$ classes.  Since it is an extension of logistic regression 
-for binary classification, it shares many of the same characteristics.  
+logistic regression model that predicts response variable values for 
+$K > 2$ classes.  Since it is an extension of logistic regression for 
+binary classification, it shares many of the same characteristics.  
 Logistic regression models in general are modifications to linear 
 regression models that make them fit to return values between 0 and 1.  
 Recall that a multiple linear regression model takes the following form:
@@ -133,9 +140,9 @@ Recall that a multiple linear regression model takes the following form:
 In Equation~\eqref{eq:linreg}, we see that there is nothing restricting 
 $Y$ from taking values $> 1$ or $< 0$.  This is problematic if we wish 
 for our model to predict the probability that the response variable 
-falls within a particular class, since probabilities can only take values 
-between 0 and 1.  In order to solve this problem, the binary classification 
-logistic regression model takes the following form:
+falls within a particular class, since probabilities can only take 
+values between 0 and 1.  In order to solve this problem, the binary 
+classification logistic regression model takes the following form:
 \begin{equation}
   \label{eq:logreg}
   p(X) = 
@@ -143,15 +150,16 @@ logistic regression model takes the following form:
   {1 + e ^ {\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
 \end{equation}
 In Equation~\eqref{eq:logreg}, we see that this problem is essentially 
-solved by exponentiation.  The multiple linear regression model is placed 
-into the exponent of $e$ to ensure that the numerator and denominator will 
-always be positive.  This means that the overall model will not return values 
-$< 0$.  Additionally, because the numerator will never exceed the denominator, 
-the fraction will always be $\leq 1$.  Thus, the model outputs values in the 
-desired range for predicting probabilities.  Since in binary classification 
-there are only two classes, the output of this model represents the probability 
-that $Y$ will fall into one of the predetermined classes.  The probability that 
-$Y$ will fall into the other class is simply $1 - p(X)$.
+solved by exponentiation.  The multiple linear regression model is 
+placed into the exponent of $e$ to ensure that the numerator and 
+denominator will always be positive.  This means that the overall 
+model will not return values $< 0$.  Additionally, because the numerator 
+will never exceed the denominator, the fraction will always be $\leq 1$.  
+Thus, the model outputs values in the desired range for predicting probabilities. 
+ Since in binary classification there are only two classes, the output of 
+ this model represents the probability that $Y$ will fall into one of the 
+ predetermined classes.  The probability that $Y$ will fall into the other 
+ class is simply $1 - p(X)$.
 
  In multinomial logistic regression, however, there are more than 2 classes 
  into which the response variable could fall.  The binary model is generalized 
@@ -164,13 +172,13 @@ $Y$ will fall into the other class is simply $1 - p(X)$.
 \end{equation}
 where $x$ is a vector of the $p$ predictor values.  In 
 Equation~\eqref{eq:multireg}, we see that the numerator is the exponentiated 
-linear model for class $k$, while the denominator is the sum of the exponentiated 
-linear models for all $K = k$ classes.  It should be noted that this is not the 
-only way of generalizing the binary logistic regression model to $K >2$ classes.  
-The model presented in Equation~\eqref{eq:multireg} is known as the \textit{softmax} 
-coding \citep{james2021introduction}.  There are other versions of multinomial 
-regression models, but we will not use them and thus not elaborate on them further 
-for this analysis.  
+linear model for class $k$, while the denominator is the sum of the 
+exponentiated linear models for all $K = k$ classes.  It should be noted 
+that this is not the only way of generalizing the binary logistic regression 
+model to $K >2$ classes.  The model presented in Equation~\eqref{eq:multireg} 
+is known as the \textit{softmax} coding \citep{james2021introduction}.  
+There are other versions of multinomial regression models, but we will not 
+use them and thus not elaborate on them further for this analysis.  
 
 LINEAR DISCRIMINANT ANALYSIS
 
@@ -191,21 +199,6 @@ CLASSIFICATION ACCURACY VALUE
 
 AREA UNDER THE ROC CURVE
 
-% Use this section to present the methodologies that will generate results by
-% analyzing the data. Suppose that the radius of a circle is $r$. Then its area is
-% \begin{equation}
-  % \label{eq:area}
-  % \pi r^2.
-% \end{equation}
-
-% Equation~\eqref{eq:area} is interesting.
-
-% Sometimes I don't want an equation to be numbered such as this one:
-% \[
-  % f(x) = \frac{1}{\sqrt{2\pi}} \exp\left( % - \frac{x^2}{2} \right),
-% \]
-% which is the density of a standard normal variable.
-
 \section{Results}
 \label{sec:resu}
 
@@ -218,40 +211,6 @@ PRESENT ACC VALUES FOR EACH OF THE METHODS IN COMPARATIVE CHART
 PRESENT ROC CURVES FOR EACH OF THE METHODS
 
 PRESENT AUC VALUES FOR EACH OF THE METHODS IN COMPARATIVE CHART
-
-% Table~\ref{tab:rv} summarizes some example draws from some distributions.
-
-% \begin{table}[tbp]
- % \caption{This is my first table.}
- % \label{tab:rv}
-% \centering
-% \begin{tabular}{rrr}
- % \toprule
-% normal & poisson & gamma \\ 
- % \midrule
-% -0.110 & 4 & 2.401 \\ 
- % 0.116 & 4 & 3.529 \\ 
- % -0.828 & 9 & 2.112 \\ 
- % -0.066 & 6 & 11.104 \\ 
- % 0.219 & 3 & 4.815 \\ 
- % 0.303 & 5 & 2.188 \\ 
- % 0.544 & 0 & 8.050 \\ 
- % -2.617 & 8 & 3.646 \\ 
- % 0.747 & 1 & 5.178 \\ 
- % -1.103 & 4 & 3.043 \\ 
-  % \bottomrule
-% \end{tabular}
-% \end{table}
-
-% Figure~\ref{fig:cars} shows the distance against the speed from this dataset.
-
-
-% \begin{figure}[tbp]
- % \centering
- % \includegraphics[width=\textwidth]{cars.pdf}
- % \caption{This is my first figure.}
- % \label{fig:cars}
-% \end{figure}
 
 \section{Discussion}
 \label{sec:disc}
