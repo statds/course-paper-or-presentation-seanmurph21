@@ -289,9 +289,41 @@ common covariance matrix across classes, or in instances where the training set 
 relatively small.  Using LDA in this latter circumstance will decrease the variance of 
 the model (although it will likely have a high bias). 
 
-K NEAREST NEIGHBORS
+NAIVE Bayes
 
-NAIVE BAYES
+Naive Bayes (NB) is distinct from LDA and QDA in the manner it estimates $f_k(x)$, 
+the conditional joint distribution of the $p$ predictors given that $Y$ is in some 
+class $k$.  Whereas LDA and QDA both assume that this joint distribution is a multivariate 
+normal distribution, NB assumes that each of the $p$ predictors are independent within each 
+class.  Thus, for a particular class, the joint probability distribution of all the 
+predictors given that $Y$ falls in that class is simply a product of the individual densities 
+of each of the predictors given $Y = k$.  In more formal terms, because of this assumption of 
+the independence of each predictor within each class, NB estimates $f_k(x)$ in the following 
+manner:
+\begin{equation}
+  \label{eq:indprob}
+  f_k(x) = f_{k1}(x_1) \times f_{k2}(x_2) \times ... \times f_{kp}(x_p)
+\end{equation} 
+where $k = 1, 2, ..., K$, and $x_1, x_2, ..., x_p$ are the $p$ predictors in the training set.  
+Thus, Equation~\eqref{eq:indprob} can simply be plugged into Equation~\eqref{eq:genmod} for 
+$f_k(x)$ in the following manner:
+\begin{equation}
+  \label{eq:nb}
+   Pr(Y = k | X = x) =
+  \frac{\pi_k [f_{k1}(x_1) \times f_{k2}(x_2) \times ... \times f_{kp}(x_p)]} 
+  {\sum_{l = 1} ^ {K} \pi_l [f_{l1}(x_1) \times f_{l2}(x_2) \times ... \times f_{lp}(x_p)]}
+\end{equation} 
+where $k = 1, 2, ..., K$.  The $f_{kp}(x_p)$ terms in Equation~\eqref{eq:nb} are much simpler 
+to estimate than the joint distribution of each of the predictors, so NB simplifies the 
+analysis greatly.  Though there are many strategies for estimating these individual predictor 
+densities within each class, these strategies will not be covered within this paper.  
+
+Although NB makes a strong (and often in practice, untrue) assumption about the independence 
+of the predictors, it still performs quite well in many circumstances.  It is particularly 
+well suited to situations in which the training set is not large enough relative to the 
+number of predictors to effectively estimate the joint density of each of the predictors.  
+
+K NEAREST NEIGHBORS
 
 SUPPORT VECTOR MACHINES
 
