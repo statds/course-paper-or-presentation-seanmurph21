@@ -325,6 +325,40 @@ number of predictors to effectively estimate the joint density of each of the pr
 
 K NEAREST NEIGHBORS
 
+The K Nearest Neighbors (KNN) approach to multi-class classification is markedly different 
+from those covered previously.  It has a rather intuitive design, and its methodology is 
+rather straightforward.  Interestingly enough, it also often obtains usefully low test 
+error rates and can perform quite well on many data sets.  
+
+Up until now, $K$ has signified the number of distinct classes that can be taken by $Y$, 
+the response variable of interest.  In KNN, K refers to the number of nearest neighbors 
+upon which the classification prediction is based.  To forestall further confusion, 
+therefore, $K$ will still be used to denote the number of classes taken by $Y$, while 
+$K ^ *$ will refer to the number of nearest neighbors in KNN analysis.  
+
+The basic idea behind KNN is that, if we wish to accurately predict which class $Y$ will 
+fall into given some vector of predictors $x$, we ought simply to look at the classes 
+taken by $Y$ given vectors as similar to $x$ as we can find in our dataset.  In practical 
+terms, this means that we base our prediction of $Y$'s class upon the class taken by the 
+largest number of the $K ^ *$ nearest neighbors to $x$.  The $K ^ *$ nearest neighbor 
+observations to $x$ are the observations with the shortest Euclidean distance to the 
+vector $x$.  The value of $K ^ *$ can be adjusted by the researcher when fitting KNN 
+models, since different values of $K ^ *$ will perform better under different scenarios.  
+Thus, one can fit many different KNN models to the same dataset, each with different 
+numbers of nearest neighbors, to predict the class of $Y$ for some vector of predictors, 
+$x$.  
+
+One notable drawback of KNN analysis is its decreased accuracy as the number of 
+predictors increases.  Holding all other things constant, when the number of predictors 
+increases, the Euclidean distance between the vector $x$ of interest and each of its 
+$K ^ *$ nearest neighbors also increases.  As such, the nearest neighbors to $x$ provide 
+decreasingly satisfactory approximations of $x$, and thus KNN models fitted in high 
+dimensions (i.e., with many predictors) tend to have poorer performance in terms of 
+prediction accuracy and test errors.  This pattern is known as the 
+\textit{curse of dimensionality}, and is an important reason to be wary in instances of 
+large values of $p$.  Fortunately, for this present analysis, $p = 11$ is relatively 
+small. 
+
 SUPPORT VECTOR MACHINES
 
 \subsection{Classification Metrics}
