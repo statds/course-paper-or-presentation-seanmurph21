@@ -177,7 +177,84 @@ Among the most notable assumptions for the logistic regression model are
 the linear decision boundary and the independence of the predictors used 
 in the model \citep{khan2023comparison}.
 
+\subsubsection{Generative Models}
+\label{sec:gm}
+
+OVERVIEW PARAGRAPH
+
+The next three multi-class classification methods are very similar in structure, 
+and so it will be useful to introduce their shared underlying methodology before 
+discussing their peculiarities.  In multinomial logistic regression, the approach 
+is to attempt to model $Pr( Y = k|X = x)$ directly.  However, there is an 
+alternative approach that can prove more useful in certain circumstances.  This 
+approach is to employ Bayes' Theorem, which obtains $Pr( Y = k | X = x)$ indirectly 
+by first obtaining the conditional distribution of $X$ in each class, $K$, and then 
+using these distributions to obtain the desired probability that $Y$ will fall into 
+$k$ given some vector of predictors $x$.  The general model takes the following form:
+\begin{equation}
+  \label{eq:genmod}
+  Pr(Y = k | X = x) =
+  \frac{\pi_k f_k(x)} {\sum_{l = 1} ^ {K} \pi_l f_l(x)}
+\end{equation}
+In Equation~\eqref{eq:genmod}, the $\pi_k$ term in the numerator simply is the prior 
+probability that $Y$ falls into class $k$.  This is computed by the proportion of all 
+the observations in the sample that fall into the $k ^ {th}$ class.  The $f_k(x)$ term 
+describes the conditional distribution of $X$ in class $k$.  In other words, 
+$f_k(x) = Pr(X = x | Y = k)$.  These two numerator terms are divided by the same two 
+terms for each class $k$ summed in the denominator.  That is, the denominator contains 
+the sum of the prior probabilities that $Y$ will fall into each of the $K$ classes 
+multiplied by the corresponding conditional distribution of $X$ in that class.  Thus, 
+the general form of the generative model is simply Bayes' Theorem, which returns here 
+an estimate of the probability that $Y$ will fall into class $k$ given some vector of 
+predictors.  
+
+Each of the next three multi-class classification models that we will consider is some 
+variant of the above, and they are principally differentiated by their varying strategies 
+for approximating $f_k(x)$.  The three kinds of generative models that we will consider 
+in this paper are linear discriminant analysis (LDA), quadratic discriminant analysis 
+(QDA), and naive Bayes (NB).  We will discuss each of them in turn.  
+
 LINEAR DISCRIMINANT ANALYSIS
+
+Linear Discriminant Analysis (LDA) is a generative model that approximates $f_k(x)$ by 
+assuming that each of the predictors comes from a normal distribution.  In the case of 
+multiple predictors such as we have in this analysis, this means that LDA assumes $x$ 
+(the vector of $p$ predictors) follows a multivariate normal distribution.  The mean, 
+$\mu$, of this multivariate normal distribution is a vector containing the mean value 
+of each predictor.  The covariance of the predictors, $\Sigma$, is the $p$ by $p$ 
+covariance matrix of the vector $x$.  Therefore, we can say in shorthand that 
+$x ~ N(\mu,\Sigma)$.  Thus, since the conditional distribution of the vector $x$ in 
+each class $k$ is assumed to be multivariate normal, the density function is 
+$$Pr(X = x|Y = k) = \frac {1} {(2\pi) ^ {p/2} |\Sigma| ^ 
+{1/2}} exp(-\frac{1}{2}   (x - \mu_k) ^ T \Sigma ^ {-1} (x - \mu_k))$$.  
+Here, $\mu_k$ is simply the vector of the mean values of the $p$ predictors where 
+$Y = k$, and $\Sigma$ is the common covariance matrix of $x$ for each of the $k$ 
+classes.  The above equation can then be plugged into Equation~\eqref{eq:genmod} 
+for $f_k(x)$, the resulting equation of which we will not reproduce here because of 
+its complexity.  Suffice it to say that this equation now obtains for us the probability 
+that $Y$ falls in class $k$ given a particular vector of predictors $x$, so that the 
+model gives the value for $Pr(Y = k|X = x)$.
+
+In order to classify a vector of predictors $x$ to some class $Y = k$, we look for the 
+class in which the value of the above $Pr(Y = k|X = x)$ is greatest.  With some 
+algebraic rearrangement, this is equivalent to classifying a vector $x$ to the 
+class for which the following equation is greatest:
+\begin{equation}
+  \label{eq:disscore}
+  \delta_k(x) = x ^ T \Sigma ^ {-1} \mu_k - 
+  \frac {1} {2} \mu_k ^ T \Sigma ^ {-1} \mu_k + \log {\pi_k}
+\end{equation}. 
+
+Equation~\eqref{eq:disscore} is called the \textit{discriminant score}.  If a class 
+has the greatest value of $\delta_k(x)$ for some vector of predictors $x$, then that 
+vector of predictors will be classified to the corresponding class.  
+
+In Equation~\eqref{eq:disscore}, each $\mu_k$ is estimated by combining the mean value 
+for each predictor in the sample into a vector, $\hat{\mu_k}$.  The values of $\pi_k$ 
+are once again the prior probability that $Y$ falls into class $k$, calculated by the 
+proportion of the total observations in class $k$.  Finally, the covariance matrix of 
+the predictors, $\Sigma$, is estimated by finding the covariance matrix of the 
+predictors in the sample. 
 
 QUADRATIC DISCRIMINANT ANALYSIS 
 
