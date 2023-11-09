@@ -114,6 +114,37 @@ outliers depicted in the boxplot at quality levels of 3 and 8.
 
 OVERVIEW PARAGRAPH
 
+Before proceeding straight into the analysis, it is necessary first to give an 
+overview of the methodology that will be employed.  That means, first, summarizing 
+how the data will be prepared, then introducing the models that will be used for 
+this analysis.  Finally, this section will also introduce the various metrics that 
+will be used to evaluate model performance and to select the best classification 
+method for the given dataset.  
+
+\subsection{Data Preparation}
+\label{sec:prep}
+
+Fortunately, the red wine dataset is quite clean.  In the 1,599 rows of the data 
+frame, there are no NA values, and thus no rows have to be removed.  
+
+In order to be able to fit various models to the data set, we will first divide the 
+dataset into a training and a test set.  The training set will comprise roughly half 
+the dataset, and will be used to train the models, as the name would suggest.  Thus, 
+it is from the data in the training set that the models will be constructed.  
+Observations from the red wine dataset will be assigned to the training set randomly, 
+to avoid any kind of bias that would result from non-random training set selection.  
+
+The other half of the dataset will contain the test set.  The test set will be used to 
+test the predictive accuracy of the models that were fitted using the training data.  
+The fitted models will take as input the predictor values in the test set, and will 
+spit out predictions for the response variable corresponding to each observation.  
+These classification predictions will then be compared to the observed response variable 
+classes for each observation.  From this comparison, the overall accuracy of each model 
+can be discerned, and they can be compared based on these findings.  The model that 
+proves to perform the best will be the model that has the greatest overall prediction 
+accuracy, and this is the model that will be recommended for use. 
+
+
 \subsection{Classification Methods}
 \label{sec:class}
 
