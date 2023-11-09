@@ -160,8 +160,8 @@ Thus, the model outputs values in the desired range for predicting probabilities
  \begin{equation}
   \label{eq:multireg}
   Pr( Y = k | X = x ) = 
-  \frac{e ^ {\beta_k0 + \beta_k1X_1 + ... + \beta_kpX_p}}
-  { \sum_{l = 1} ^ {K}  e ^ {\beta_l0 + \beta_l1X_1 + ... + \beta_lpX_p}},
+  \frac{e ^ {\beta_{k0} + \beta_{k1}X_1 + ... + \beta_{kp}X_p}}
+  { \sum_{l = 1} ^ {K}  e ^ {\beta_{l0} + \beta_{l1}X_1 + ... + \beta_{lp}X_p}},
 \end{equation}
 where $x$ is a vector of the $p$ predictor values.  In 
 Equation~\eqref{eq:multireg}, we see that the numerator is the exponentiated 
