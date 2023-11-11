@@ -26,10 +26,55 @@ THE ABSTRACT WILL BE WRITTEN AFTER THE REST OF THE PAPER HAS BEEN WRITTEN.
 \section{Introduction}
 \label{sec:intro}
 
-% Use this section to answer three questions:
-% Why is the topic important/interesting?
-% What has been done on this topic in the literature?
-% What is your contribution?
+One central facet of the data science/machine learning world is the ability of 
+researchers to design models that will accurately predict outcomes based on data.  
+Indeed, this is one of the major functions that data scientists play in the 
+commercial world, academia, and elsewhere.  There is a tremendous demand, 
+especially with the gargantuan quantities of data that are now at our disposal, 
+for data scientists who can build effective models to learn from data and make 
+accurate predictions for the future.
+
+In general, prediction tasks can be of two types, depending on the characteristics 
+of the response variable.  When the variable of interest is a numeric quantity, 
+then the prediction task is termed \textit{regression}.  When the variable of 
+interest takes different classes, however, the prediction task is termed 
+\textit{classification}.  In classification, the goal of the researcher is to build 
+a model that learns effectively from the input variables, the \textit{predictors}, 
+and spits out accurate predictions of the class that should be assigned for a given 
+vector of predictors, $x$.  The researcher considers various different models with 
+their own respective strengths and weaknesses, and compares their relative 
+performance to select the strongest one. 
+
+Within classification, there are also two distinct types.  The simplest form of 
+classification is \textit{binary classification}.  This is the circumstance in 
+which the response variable only takes one of two classes, and the task is to 
+predict which of these classes a given observation will take.  However, a response 
+variable can take more than two classes.  This form of classification is known as 
+\textit{multi-class classification}, and results in more complex models.
+
+As there are both many different classification models and many different metrics 
+for evaluating the effectiveness of classification models, there has been much 
+literature comparing these methods.  Since the classification models all make 
+different underlying assumptions, and since they have different relative strengths 
+in different circumstances, it is a common practice to compare the performance of 
+these methods on different datasets.  Comparisons of multi-class classification 
+methods have been carried out by \citep{alsafy2014multiclass}, 
+\citep{khan2023comparison}, and \citep{szollHosi2012comparison}.  Additionally, 
+there are papers such as \citep{grandini2020metrics} and \citep{grandini2020metrics} 
+that compare the utility of different classification metrics, depending upon the 
+dataset and its associated characteristics.  
+
+This paper will follow a similar vein of exploring various multi-class 
+classification methods by a comparative analysis.  The analysis will focus on a 
+dataset containing information on a collection of 1,599 red wine samples from 
+northern Portugal.  The goal will be to predict the wine quality from a choice 
+of 11 predictors, all of which are numeric physiochemical measurements of the wine 
+samples.  I will fit a series of different multi-class classification models to 
+the data, and will use several different metrics to comparatively evaluate their 
+performance.  From this analysis I hope to deduce which particular features of the 
+dataset make it suitable for the classification method that proves the best.  I 
+also aim to give an account of why the poorer-performing methods failed to provide 
+relatively accurate predictions for the red wine quality.  
 
 The rest of the paper will be organized in the following way.  
 An introduction to the red wine data set will be presented in 
@@ -487,7 +532,7 @@ containing the most observations does not dominate the accuracy metric.  The
 modification will be made in the following way:
 \begin{equation}
     \label{eq:bav}
-    BAV = \frac {\Sigma_ {i=1} ^ {K} \frac {T_k} {n_k}} {K}
+    BAV = \frac {\Sigma_ {k=1} ^ {K} \frac {T_k} {n_k}} {K}
 \end{equation}
 , where K denotes the number of classes taken by the response variable.  
 
