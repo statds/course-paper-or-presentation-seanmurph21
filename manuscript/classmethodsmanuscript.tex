@@ -395,7 +395,62 @@ SUPPORT VECTOR MACHINES
 \subsection{Classification Metrics}
 \label{sec:metr}
 
+OVERVIEW PARAGRAPH
+
+Once the models have been constructed, the next task is to select the criteria 
+by which their performance will be evaluated and compared.  As it turns out, 
+when it comes to multi-class classification problems, there are many ways to 
+accomplish this task, and the analyst must select the method that is best 
+suited to their purposes.  Without going into an excessive degree of length, 
+this section will present a brief overview of some of the simpler methods of 
+analyzing model performance.  Each of the metrics surveyed here depend upon 
+the more basic notion of a confusion matrix, which will be discussed first.  
+Then, the subsequent discussion will focus on the calculations that can be 
+made with confusion matrices as their foundation, as well as the situations 
+in which they are more or less appropriate.  Ultimately, two of these metrics 
+will be used for the analysis in this paper: the overall Classification 
+Accuracy Value, and the Weighted Balanced Accuracy.   
+
 CONFUSION MATRICES
+
+A confusion matrix is a basic analytical tool for evaluating classification model performance.  
+
+MAKE A CONFUSION MATRIX HERE
+\begin{table}[tbp]
+\caption{This is a hypothetical example of a multi-class confusion matrix.}
+\label{tab:conf}
+\centering
+\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}|p{3cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{Country List} \\
+ \hline
+ Afghanistan   & AF    &AFG&   004\\
+ Aland Islands&   AX  & ALA   &248\\
+ Albania &AL & ALB&  008\\
+ Algeria    &DZ & DZA&  012\\
+ American Samoa&   AS  & ASM&016\\
+ Andorra& AD  & AND   &020\\
+ Angola& AO  & AGO&024\\
+ \hline
+\end{tabular}
+\end{table}
+
+In the confusion matrix in Table~\ref{tab:conf}, the predicted classes are the 
+rows and the actual (test dataset) classes are the columns.  The classes in 
+both the rows and columns are presented in exactly the same order.  Thus, when 
+the model predicts that a particular observation will take on a specific class, 
+if that same observation took the predicted class in the test dataset, then the 
+row and column values match.  This would be an instance of an observation that 
+is correctly predicted by the model.  Thus, since the classes in the rows and 
+columns are presented in the same order, the diagonal elements of the confusion 
+matrix are the correctly predicted observations.  These are all the observations 
+whose predicted class matches its actual class.  
+
+On the other hand, all the elements of the confusion matrix that are not on the 
+diagonal are the incorrectly predicted observations.  These are the observations 
+whose predicted class does not match their actual class.  The calculations in 
+the metrics that follow are predicated on the presentation of correctly versus 
+incorrectly predicted observations in the confusion matrix.  
 
 CLASSIFICATION ACCURACY VALUE
 
