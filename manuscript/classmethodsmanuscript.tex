@@ -105,47 +105,24 @@ volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide,
 total sulfur dioxide, density, pH, sulfates and alcohol.  The other variable 
 contained in the dataset is wine quality, which takes integer values from 0-10 
 (0 being lowest quality, 10 being highest quality).  Though numeric, this 
-variable will be treated as having 11 classes, and will be the response variable 
-in the analysis.  The goal is to predict the class of wine quality for a given 
-sample of red wine based on its physiochemical properties.  
+variable will be treated as having 11 classes, and will be the response 
+variable in the analysis.  The goal is to predict the class of wine quality 
+for a given sample of red wine based on its physiochemical properties.  
 
-PROVIDE HERE SOME SUMMARY STATISTICS OF THE DATASET
-
-See a summary of the counts of wine samples at each quality level in 
-Table~\ref{tab:qual}.
-
-We can see that there are no wine samples in our dataset that had quality 
-levels of 0, 1, 2, 9, or 10.  All of the quality levels fell within the 
-range from 3 to 8, and within this range, the vast majority were rated 
-either a 5 or a 6.  Indeed, these two levels alone account for over 82 
-percent of the data.  
-
-We can see in the histogram and boxplot in Figure~\ref{fig:wine} that 
-the distribution of wine quality levels is roughly symmetric, with 
-outliers depicted in the boxplot at quality levels of 3 and 8.  
-
-\begin{table}[tbp]
- \caption{This table provides the number of wine samples by each wine quality level.}
-\label{tab:qual}
-\centering
-\begin{tabular}{rrr}
- \toprule
- Quality Level & Count \\ 
- \midrule
-0 & 0 \\ 
-1 & 0 \\ 
-2 & 0 \\ 
-3 & 10 \\ 
-4 & 53 \\ 
-5 & 681 \\ 
-6 & 638 \\ 
-7 & 199 \\ 
-8 & 18 \\ 
-9 & 0 \\ 
-10 & 0 \\
-\bottomrule
-\end{tabular}
-\end{table}
+One important note before describing the methodology of this study concerns the 
+response variable, wine quality.  A boxplot and histogram of the distribution of 
+observations according to their wine quality levels can be seen in 
+Figure~\ref{fig:wine}.  We can see that there are no wine samples in our dataset 
+that had quality levels of 0, 1, 2, 9, or 10.  All of the quality levels fell 
+within the range from 3 to 8, and within this range, the vast majority were rated 
+either a 5 or a 6.  Indeed, these two levels alone account for over 82 percent of 
+the data.  We can see in the histogram and boxplot in Figure~\ref{fig:wine} that 
+the distribution of wine quality levels is roughly symmetric, with outliers 
+depicted in the boxplot at quality levels of 3 and 8.  Thus, the response variable 
+has unbalanced classes; there are far from an equal number of observations in each 
+class, especially considering that some classes do not contain any observations.  
+The models built in this analysis will consequently ignore the missing classes for 
+which there are no training observations.  
 
 \begin{figure}[tbp]
  \centering
