@@ -454,6 +454,29 @@ incorrectly predicted observations in the confusion matrix.
 
 CLASSIFICATION ACCURACY VALUE
 
+The Classification Accuracy Value (CAV) is the simplest and most straightforward 
+means of assessing the overall prediction accuracy of a classification model.  To 
+calculate the CAV using a confusion matrix, simply sum the diagonal elements of 
+the matrix in the numerator, and sum all the elements of the matrix in the 
+denominator.  The corresponding proportion will be the proportion of observations 
+whose class is predicted accurately by the model.  This value is the Classification 
+Accuracy Value.  The calculation for this metric is presented in 
+Equation~\eqref{eq:cav}:
+\begin{equation}
+    \label{eq:cav}
+    CAV = \frac {T} {T + F}
+\end{equation}
+, where $T$ stands for the true predictions (on the diagonal of the matrix) and $F$ 
+stands for the false predictions, which are the non-diagonal elements.  
+
+The CAV is best applied in situations where the overall prediction accuracy of the 
+model is of the highest concern, and where class-specific prediction accuracy is less 
+important.  In terms of the CAV, each observation is equally weighted, but the 
+relative prediction accuracy within each class is not taken as strictly into account 
+as in other metrics, as we shall see below.  If it is of the utmost importance that 
+the model has a high prediction accuracy for each class, then other metrics may be 
+applied that take this factor into account.
+
 AREA UNDER THE ROC CURVE
 
 \section{Results}
