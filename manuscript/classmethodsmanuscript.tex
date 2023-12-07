@@ -255,37 +255,6 @@ proportion of the total observations in class $k$.  Finally, the covariance matr
 the predictors, $\Sigma$, is estimated by finding the covariance matrix of the 
 predictors in the sample. 
 
-QUADRATIC DISCRIMINANT ANALYSIS 
-
-LDA assumes that the vector of predictors follows a multivariate normal distribution, 
-and that there is a common covariance matrix for each of the $k$ classes.  This latter 
-assumption, however, is not present in all forms of discriminant analysis.  Quadratic 
-Discriminant Analysis (QDA) is a generative model that allows for different covariance 
-matrices for each of the $k$ classes.  Thus, the $\Sigma$ in LDA is replaced by 
-$\Sigma_k$ in QDA, which is the covariance matrix of the $p$ predictors at class $k$.  
-Taking this into account, the discriminant score now becomes the following:
-\begin{equation}
-  \label{eq:disscore2}
-  \delta_k(x) = -\frac {1} {2} (x - \mu_k) ^ T \Sigma_k ^ {-1} (x - \mu_k) -\frac {1} {2} 
-  \log {|\Sigma_k|} + \log {\pi_k}
-\end{equation}. 
-
-Notice that the discriminant score in Equation~\eqref{eq:disscore2} is a 
-\textit{quadratic} function of $x$ as opposed to a linear function.  This is where 
-\textit{quadratic} discriminant analysis gets its name.  
-
-Relative to LDA, QDA is a more flexible model, since in order to fit a QDA model from 
-training data, a separate covariance matrix must be estimated for each class.  This 
-means there are correspondingly more parameters to estimate in QDA relative to LDA as 
-the number of classes increases.  QDA can be better to use when the assumption of a 
-common covariance matrix across each class is unreasonable, or when there are a large 
-number of observations in the training set.  In this scenario, the large training set 
-will reduce the variance of the model, so that an LDA model does not have to be resorted 
-to to do this.  LDA can be better in situations where it is reasonable to assume a 
-common covariance matrix across classes, or in instances where the training set is 
-relatively small.  Using LDA in this latter circumstance will decrease the variance of 
-the model (although it will likely have a high bias). 
-
 NAIVE Bayes
 
 Naive Bayes (NB) is distinct from LDA and QDA in the manner it estimates $f_k(x)$, 
