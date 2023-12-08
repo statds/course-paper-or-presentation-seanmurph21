@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+
+%% preamble
+\usepackage{amsmath}
+\usepackage[margin = 1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{natbib}
+
+% highlighting hyper links
+\usepackage[colorlinks=true, citecolor=blue]{hyperref}
+
+
+\title{Proposal: Classification Methods: A Comparative Analysis}
+\author{Sean Murphy\\
+  Statistics Major\\
+  University of Connecticut
+}
+
+\begin{document}
+\maketitle
+
+
+\paragraph{Introduction}
+
+Classification is a major task in the data science world, 
+and numerous methods have been developed for this purpose.  
+Classification methods are applied when the response variable 
+that is to be predicted is a categorical variable with more 
+than one class.  The goal in such a scenario is to use the 
+predictors available in the data to build a model that will 
+accurately predict which class the response variable will take 
+on.  The model should be able to take as input a certain value 
+for each predictor, and spit out either the predicted class of 
+the response variable or a probability that the response variable 
+will take on a certain class (depending on the classification method).    
+
+There have been many papers in the literature comparing the effectiveness 
+of various classification methods when applied to different data sets.  
+Common methods to be compared are decision trees, logistic regression, 
+linear regression, naive Bayes, support vector machines, K nearest neighbors, 
+linear discriminant analysis, and artificial neural networks, just to name 
+a few \citep{entezari2009comparison}.  Given the varying assumptions built 
+in to the methods described above, each method is likely to perform optimally 
+in different scenarios.  This is why comparative analyses are so important; 
+they enable researchers to identify the conditions and data sets in which 
+particular methods are most useful. 
+
+The effectiveness of a model can be measured in several different ways.  
+A direct approach is simply to apply the models to a test data set, and 
+compare the predictions values of the response variable with the actual 
+values of the response variable.  From this, one can determine the accuracy 
+of the model--the proportion of predictions that were made correctly 
+\citep{barnaghi2012comparative}.  Another standard approach is to construct 
+an ROC (receiver operating characteristic) curve.  Comparatively better 
+models will have greater AUC (area under the curve).
+
+In this paper, I will conduct a comparative analysis of several classification
+methods when applied to a red wine data set.  I will first introduce the 
+various methods to be implemented, and then will fit a model for each method 
+to the data.  After fitting the models, I will compare their accuracy, and 
+discuss reasons why certain methods outperformed others.  
+
+\paragraph{Specific Aims}
+
+The specific aim of this analysis is to identify which classification methods 
+outperform others in certain scenarios.  Particularly, after the results are 
+in and the methods have been compared, the data set itself will be scrutinized 
+to identify which features of the data set resulted in greater accuracy for 
+different methods.  The data may satisfy the assumptions of one method better 
+than others, and may present patterns that make the application of one 
+classification method more appropriate than another.    
+
+\paragraph{Data}
+
+The data set that I will use for this analysis has been downloaded from UC Irvine's 
+machine learning repository at https://archive.ics.uci.edu/dataset/186/wine+quality.  
+It is a data set containing information about 1,599 red wine samples from the north 
+of Portugal.  The samples are rated on a scale from 0-10 for quality, and numerous 
+sensory and physiochemical measurements are made on each sample (these are the 
+predictors in the analysis).  The 11 potential predictors for this analysis are all 
+quantitative variables.  The predicted response will be the wine quality, which is 
+a categorical variable taking values from 0 to 10.   
+
+\paragraph{Research Design and Methods}
+
+The methodology for this analysis will be as follows.  The data will first be split 
+via random sample into two equally-sized groups, a training group and a test group.  
+Then, a new response variable, highquality, will be created with two levels.  If 
+the quality rating exceeds 5, highquality will be set to TRUE; otherwise, it will 
+be set to FALSE.  With this as the new modified response variable, models will be 
+fit for logistic regression, LDA, QDA, naive Bayes, KNN (with varying levels of K), 
+and support vector machines.  The models will be trained using the training set.  
+
+After the models have been made, they will be used to predict highquality for the 
+test set.  Then, these predictions will be compared to the actual response values 
+of highquality for the test set, and the overall error rate will be calculated.  
+In this analysis, the overall error rate will be calculated by taking the number 
+of responses predicted incorrectly over the number of total responses predicted.  
+Additionally, for each method, the ROC curve will be generated and the area under 
+the curve will be compared for each method.  
+
+\paragraph{Discussion}
+
+The most challenging aspect of this analysis will likely be discerning why certain 
+methods performed poorly relative to others.  This will mean, in large part, 
+understanding the assumptions underlying each classification method, and identifying 
+whether or not the data meet those assumptions.  
+
+One limitation of this analysis is that, under its current methodology, it will not 
+explore how different classification methods compare for responses that take on more 
+than two classes.  
+
+As a fall back plan, I can always add more classification methods, such as decision 
+trees.  Additionally, I can conduct the same analysis using the quality variable as 
+given in the data set, without making it a two-level variable.  Doing this, I can 
+eliminate the methods, such as logistic regression, that are not well suited for 
+predicting responses that take on more than two classes.  
+
+\bibliography{proposalreferences}
+\bibliographystyle{chicago}
+
+\end{document}
