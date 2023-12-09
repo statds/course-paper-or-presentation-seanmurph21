@@ -325,7 +325,93 @@ prediction accuracy and test errors.  This pattern is known as the
 large values of $p$.  Fortunately, for this present analysis, $p = 11$ is relatively 
 small. 
 
-SUPPORT VECTOR MACHINES
+\subsubsection{Tree-Based Methods}
+\label{sec:tbm}
+
+OVERVIEW PARAGRAPH
+
+Tree-based methods are another popular strategy for modeling data.  Tree-based 
+methods can be applied both for regression and classification tasks.  The most 
+basic form of such a method is the simple decision tree.  Decision trees work 
+by partitioning the predictor space into $m$ distinct and non-overlapping 
+regions, $R_1, ... , R_m$, and then predicting at some uniform value for each 
+observation within that region.  For regression tasks, a vector of predictors 
+$x$ in region $R_i$ is predicted to be the mean of the response values for all 
+the observations in $R_i$.  For classification tasks, however, $x$ will be 
+predicted to take the class that is taken by the most observations in $R_i$; 
+it is a simple majority vote.  
+
+Most of the computational work that is done in generating simple decision trees 
+comes when subdividing the predictor space.  This is done in a sequential process.  
+At each step, every possible binary split in the predictor space is considered as 
+a candidate for the first branch of the tree overall.  These candidate split zones 
+are compared against each other according to some metric which depends on the 
+prediction task, and then the optimal split is chosen.  For regression tasks, the 
+optimal split will be the one that yields the lowest overall residual sum of 
+squares of the resulting model.  For classification tasks, there are two main 
+metrics that are used for determining the optimal splitting point: the Gini index 
+and the cross-entropy value.  The Gini index is calculated in the following way:
+
+\begin{equation}
+  \label{eq:gini}
+   G = \sum_{k = 1} ^ {K} \hat{p}_{mk} (1 - \hat{p}_{mk}).
+\end{equation} 
+
+Essentially, the Gini index is derived from the formula for the variance of 
+Bernoulli random variables.  The term $\hat{p}_{mk}$ in Equation~\eqref{eq:gini} 
+is the proportion of observations in region $m$ that take on class $k$.  In the 
+above equation, we see that 
+$\hat{p}_{mk} (1 - \hat{p}_{mk})$ is minimized when $\hat{p}_{mk}$ is closest 
+either to $0$ or to $1$, and is maximized when $\hat{p}_{mk} = 0.5$.  Thus, the 
+Gini index is essentially a measure of the purity of each region, in terms of the 
+proportion of observations within that region that take on one particular class.  
+When the Gini index is used, the tree will be split at the point that minimizes 
+the Gini index.  
+
+Cross-entropy is a very similar alternative to the Gini index.  Instead of being 
+calculated using the formula for the variance of a Bernoulli random variable, it 
+is calculated in the following manner:
+
+\begin{equation}
+  \label{eq:crossent}
+   D = - \sum_{k = 1} ^ {K} \hat{p}_{mk} log (\hat{p}_{mk}).
+\end{equation} 
+
+Although the $log$ function is used in Equation~\eqref{eq:crossent}, the overall 
+term behaves very similarly to the Gini index.  The negative sign in front of the 
+summation is there to ensure that the goal is still to minimize this metric to 
+select the optimal splitting point.  
+Once the predictor space has been split, the same process is repeated to perform 
+the other splits until the desired tree size has been reached.  This tree can then 
+be used to predict the response for observations in the test set.  Although simple 
+decision trees do not often outperform their competitors, there are more advanced 
+tree-based methods that predict quite accurately.  
+
+RANDOM FORESTS
+
+One such advanced tree-based method is the random forest (RF).  Random forest models 
+employ two major techniques to enhance the prediction accuracy relative to simple 
+decision trees.  The first is to utilize the bootstrap.  In statistics, bootstrapping 
+simply refers to taking repeated random samples without replacement from an original 
+dataset in order to generate a pseudo-population.  Then, the estimate of the parameter 
+of interest can simply be an average of all these $B$ bootstrapped datasets.  When 
+this strategy is applied to trees, this means that for each bootstrapped sample, a 
+separate tree is grown, 
+$\hat{f} ^ {*b} (x)$.  The prediction for some observation, $x$, will then be the most 
+frequently predicted class among all the trees for $x$.  
+
+The second technique employed by RF models is the introduction of randomness in the 
+tree-growing process itself.  One problem with trees grown on bootstrapped datasets is 
+that they may have high correlations with each other.  RF models attempt to decorrelate 
+the trees by only considering some subset, $s$, of the $p$ predictors to partition that 
+data over at each splitting step.  Thus, at each step, a subset of $s$ predictors is 
+randomly selected, and the tree will only branch along one of those predictors.  This 
+strategy helps to reduce the variance of the model overall.  Although the value of $s$ 
+can be selected in various manners, one common choice of $s$ is the integer closest to 
+$\sqrt{p}$.
+
+Thus, with these two strategies, random forests tend to improve drastically upon the 
+foundation laid by simple decision trees.
 
 \subsection{Classification Metrics}
 \label{sec:metr}
