@@ -412,59 +412,6 @@ as in other metrics, as we shall see below.  If it is of the utmost importance t
 the model has a high prediction accuracy for each class, then other metrics may be 
 applied that take this factor into account.
 
-BALANCED ACCURACY VALUE
-
-In order to have a metric that takes into account the class-specific prediction 
-accuracy of the model, a slight modification must be made to the formula in 
-Equation~\eqref{eq:cav}.  The modification in this case will weight the prediction 
-accuracy for each class equally, so that the prediction accuracy of the classes 
-containing the most observations does not dominate the accuracy metric.  The 
-modification will be made in the following way:
-\begin{equation}
-    \label{eq:bav}
-    BAV = \frac {\Sigma_ {k=1} ^ {K} \frac {T_k} {n_k}} {K}
-\end{equation}
-, where K denotes the number of classes taken by the response variable.  
-
-In Equation~\eqref{eq:bav}, BAV stands for the Balanced Accuracy Value.  In the 
-numerator, $T_k$ stands for the number of true predictions in class $k$.  That 
-is to say, it is the number of observations in class $k$ that were predicted to 
-take class $k$ by the model.  Within a column, this will be the value that falls 
-on the diagonal of the matrix.  In Equation~\eqref{eq:bav}, the $n_k$ term denotes 
-the total number of observations falling in the $k^{th}$ class.  Thus, each fraction 
-that is summed in the numerator is simply the prediction accuracy within the $k^{th}$ 
-class.  This means that the equation itself simply returns the average of the 
-prediction accuracy values within each class.  The equation calculates the proportion 
-of the observations within each class that were predicted accurately, sums these 
-values for each of the $1...K$ classes, and then divides the $K$ classes to return 
-the average value.
-
-This metric is best employed in situations where it is highly important for the model 
-to predict each class accurately.  Some models may predict certain classes far better 
-than they do other classes.  Such models will be penalized in their BAV ratings, 
-because the classes for which model prediction accuracy suffers will draw the BAV 
-level down. 
-
-It is important to note one substantial qualification on the preceding paragraph.  
-The BAV equation necessitates that each class's prediction accuracy will be weighted 
-exactly the same as the others.  This is because what is being summed in the numerator 
-are fractions, that are all $\geq 0$ and $\leq 1$ regardless of how many observations 
-from the dataset actually fell into that category.  When each class has roughly the 
-same amount of observations, the dataset is said to be \textit{balanced}, while 
-datasets with varying observation amounts per class are said to be \textit{unbalanced}.  
-In the case of a balanced dataset, the BAV value will not differ greatly at all from 
-the CAV value.  In fact, if the dataset is perfectly balanced, the two values will be 
-identical \citep{grandini2020metrics}.  This is because the effect of equalizing the 
-weights of each class in the BAV is negligible when each class does actually have the 
-same weight in the dataset.
-
-On the other hand, BAV values differ substantially from CAV values when the dataset is 
-heavily unbalanced and there are significant disparities between the class-specific 
-prediction accuracy of many of the classes.  In a situation such as this, the 
-researcher may determine it wise to employ BAV if it is important to predict each 
-class accurately to get a more fitting evaluation of the model's appropriateness for 
-subsequent predictions.  
-
 \section{Results}
 \label{sec:resu}
 
